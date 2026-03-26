@@ -1,188 +1,283 @@
-/**
- * Utility: Generate reusable business questions
- */
-const generateQuestions = (prefix = 'Question') => {
-  return Array.from({ length: 4 }, (_, index) => {
-    const number = index + 1;
-    return {
-      id: `${prefix}-${number}`,
-      title: `${prefix} ${number}`,
-      description: 'Short description of the item goes nicely here.',
-    };
-  });
-};
+const sharedQuestions = (prefix = 'Question') =>
+  [1, 2, 3, 4].map((n) => ({
+    id: `${prefix}-${n}`,
+    title: `Question ${n}`,
+    description: 'Short description of the item goes nicely here.',
+  }));
 
-/**
- * Core Asset Data
- */
 export const ASSETS = [
   {
     id: 'kpi-1',
     title: 'Revenue',
+    description: 'Short description of the item goes nicely here.',
     type: 'kpi',
     category: 'featured',
-
-    description: 'Short description of the item goes nicely here.',
-    subtitle: 'Descriptive name of the KPI',
-
-    metadata: {
-      createdOn: '06/27/2024',
-      lastUpdated: '07/23/2024',
-      usageCount: 2485,
-      scope: 'Universal',
-      pages: 1,
-    },
-
+    date: '06/27/2024',
     tags: ['ecommerce', 'coverage', 'stakeholders'],
+    subtitle: 'Descriptive name of the KPI',
+    usedCount: 2485,
+    scopeType: 'Universal',
+    pages: 1,
+    lastUpdated: '07/23/2024',
+    businessQuestions: sharedQuestions('KPI'),
+    metricIds: ['M-1042', 'M-8891', 'M-2201'],
+    calculation: 'SUM(revenue) / COUNT(DISTINCT orders) over trailing 30 days.',
+    visualsAvailable: 'Line trend, bar by region, sparkline in executive summary.',
+    affiliateApplicability: 'Applies to all retail affiliates; excluded for wholesale-only.',
+    /** Primary chart recommended for this KPI (bar | line | pie). */
+    chartType: 'line',
     affiliates: ['India', 'US', 'EU'],
-
-    businessQuestions: generateQuestions('KPI'),
-
-    metrics: {
-      ids: ['M-1042', 'M-8891', 'M-2201'],
-      calculation:
-        'SUM(revenue) / COUNT(DISTINCT orders) over trailing 30 days.',
-    },
-
-    visualization: {
-      primaryChart: 'line',
-      available:
-        'Line trend, bar by region, sparkline in executive summary.',
-    },
-
-    applicability:
-      'Applies to all retail affiliates; excluded for wholesale-only.',
   },
-
   {
     id: 'layout-1',
     title: 'INTES',
+    description: 'Short description of the item goes nicely here.',
     type: 'layout',
     category: 'featured',
-
-    description: 'Short description of the item goes nicely here.',
-    subtitle: 'Descriptive name of the Layout',
-
-    metadata: {
-      createdOn: '06/27/2024',
-      lastUpdated: '07/23/2024',
-      usageCount: 2485,
-      scope: 'Universal',
-      pages: 6,
-    },
-
+    date: '06/27/2024',
     tags: ['comms', 'coverage', 'stakeholders'],
-    affiliates: ['US', 'EU'],
-
-    businessQuestions: generateQuestions('Layout'),
-
+    subtitle: 'Descriptive name of the Layout',
+    usedCount: 2485,
+    scopeType: 'Universal',
+    pages: 6,
+    lastUpdated: '07/23/2024',
+    businessQuestions: sharedQuestions('Layout'),
     kpisUsed: ['Revenue trend', 'Conversion funnel', 'CAC vs LTV'],
+    affiliates: ['US', 'EU'],
   },
-
   {
     id: 'viz-1',
     title: 'North Star Dashboard',
+    description: 'Short description of the item goes nicely here.',
     type: 'dataviz',
     category: 'featured',
-
-    description: 'Executive overview of product health',
-    subtitle: 'Executive overview of product health',
-
-    metadata: {
-      createdOn: '06/20/2024',
-      lastUpdated: '07/01/2024',
-      usageCount: 1820,
-      scope: 'Universal',
-      pages: 1,
-    },
-
+    date: '06/20/2024',
     tags: ['growth', 'retention', 'product'],
-    businessQuestions: generateQuestions('Viz'),
-
+    subtitle: 'Executive overview of product health',
+    usedCount: 1820,
+    scopeType: 'Universal',
+    pages: 1,
+    lastUpdated: '07/01/2024',
+    businessQuestions: sharedQuestions('Viz'),
     kpiFavorites: ['WAU', 'Activation rate', 'NPS'],
-
-    visualization: {
-      primaryChart: 'bar',
-    },
-
-    context:
-      'Curated for quarterly business reviews. Filters apply globally.',
-
+    assetContext:
+      'Curated for quarterly business reviews. Filters apply to global regions by default.',
+    /** Chart-style asset; use for bar / line / pie UI. */
+    vizChartType: 'bar',
     isRestricted: true,
   },
-
   {
     id: 'story-1',
     title: 'QBR Storyboard',
+    description: 'Short description of the item goes nicely here.',
     type: 'storyboard',
     category: 'featured',
-
-    description: 'Board-ready storyline for revenue and pipeline',
-    subtitle: 'Board-ready storyline for revenue and pipeline',
-
-    metadata: {
-      createdOn: '06/15/2024',
-      lastUpdated: '06/28/2024',
-      usageCount: 940,
-      scope: 'Layout',
-      pages: 12,
-    },
-
+    date: '06/15/2024',
     tags: ['executive', 'quarterly', 'narrative'],
+    subtitle: 'Board-ready storyline for revenue and pipeline',
+    usedCount: 940,
+    scopeType: 'Layout',
+    pages: 12,
+    lastUpdated: '06/28/2024',
+    businessQuestions: sharedQuestions('Story'),
+    coupledKpis: ['Pipeline coverage', 'Win rate', 'Avg deal size'],
+    coupledFilters: ['Region', 'Segment', 'Fiscal quarter'],
+    applicableAffiliates: ['NA Retail', 'EU Enterprise', 'APAC Digital'],
     affiliates: ['India', 'US'],
-
-    businessQuestions: generateQuestions('Story'),
-
-    linkedKpis: ['Pipeline coverage', 'Win rate', 'Avg deal size'],
-    filters: ['Region', 'Segment', 'Fiscal quarter'],
-    applicableAffiliates: [
-      'NA Retail',
-      'EU Enterprise',
-      'APAC Digital',
-    ],
+  },
+  {
+    id: 'kpi-2',
+    title: 'Conversion Rate',
+    description: 'Short description of the item goes nicely here.',
+    type: 'kpi',
+    category: 'featured',
+    date: '06/10/2024',
+    tags: ['funnel', 'marketing'],
+    subtitle: 'Session to purchase conversion',
+    usedCount: 3102,
+    scopeType: 'KPI',
+    pages: 1,
+    lastUpdated: '07/10/2024',
+    businessQuestions: sharedQuestions('KPI-B'),
+    metricIds: ['M-5510'],
+    calculation: 'Purchases / sessions * 100, attributed to last-touch channel.',
+    visualsAvailable: 'Funnel steps, cohort heatmap.',
+    affiliateApplicability: 'Marketing affiliates only.',
+    chartType: 'pie',
+    isRestricted: true,
+  },
+  {
+    id: 'layout-2',
+    title: 'Weekly Ops Pack',
+    description: 'Short description of the item goes nicely here.',
+    type: 'layout',
+    category: 'trending',
+    date: '06/05/2024',
+    tags: ['operations', 'sla'],
+    subtitle: 'Operational health at a glance',
+    usedCount: 1205,
+    scopeType: 'Universal',
+    pages: 4,
+    lastUpdated: '07/12/2024',
+    businessQuestions: sharedQuestions('Layout-B'),
+    kpisUsed: ['SLA breaches', 'Ticket volume', 'CSAT'],
+    affiliates: ['EU'],
+  },
+  {
+    id: 'viz-2',
+    title: 'Cohort Retention',
+    description: 'Short description of the item goes nicely here.',
+    type: 'dataviz',
+    category: 'trending',
+    date: '06/01/2024',
+    tags: ['retention', 'product'],
+    subtitle: 'Weekly cohort curves',
+    usedCount: 2210,
+    scopeType: 'Universal',
+    pages: 1,
+    lastUpdated: '06/25/2024',
+    businessQuestions: sharedQuestions('Viz-B'),
+    kpiFavorites: ['D7 retention', 'D30 retention'],
+    assetContext: 'Supports weekly product reviews; filter by acquisition channel.',
+    vizChartType: 'line',
+  },
+  {
+    id: 'story-2',
+    title: 'Campaign Deep Dive',
+    description: 'Short description of the item goes nicely here.',
+    type: 'storyboard',
+    category: 'trending',
+    date: '05/28/2024',
+    tags: ['marketing', 'campaigns'],
+    subtitle: 'End-to-end campaign performance',
+    usedCount: 672,
+    scopeType: 'Storyboard',
+    pages: 8,
+    lastUpdated: '06/18/2024',
+    businessQuestions: sharedQuestions('Story-B'),
+    coupledKpis: ['Spend', 'ROAS', 'CTR'],
+    coupledFilters: ['Campaign', 'Audience', 'Geo'],
+    applicableAffiliates: ['Growth Marketing', 'Brand'],
+    affiliates: ['US'],
+  },
+  {
+    id: 'kpi-3',
+    title: 'Net Revenue Retention',
+    description: 'Short description of the item goes nicely here.',
+    type: 'kpi',
+    category: 'trending',
+    date: '05/20/2024',
+    tags: ['finance', 'saas'],
+    subtitle: 'NRR across segments',
+    usedCount: 1890,
+    scopeType: 'KPI',
+    pages: 1,
+    lastUpdated: '07/05/2024',
+    businessQuestions: sharedQuestions('KPI-C'),
+    metricIds: ['M-7001', 'M-7002'],
+    calculation: '(Starting ARR + expansion - churn - contraction) / Starting ARR.',
+    visualsAvailable: 'Waterfall, segment breakdown.',
+    affiliateApplicability: 'Finance and CS leadership.',
+    chartType: 'bar',
+  },
+  {
+    id: 'layout-3',
+    title: 'Customer 360',
+    description: 'Short description of the item goes nicely here.',
+    type: 'layout',
+    category: 'trending',
+    date: '05/15/2024',
+    tags: ['crm', '360'],
+    subtitle: 'Unified customer view',
+    usedCount: 998,
+    scopeType: 'Universal',
+    pages: 10,
+    lastUpdated: '06/30/2024',
+    businessQuestions: sharedQuestions('Layout-C'),
+    kpisUsed: ['LTV', 'Support tickets', 'Product adoption score'],
+    isRestricted: true,
+    affiliates: ['India', 'US', 'EU'],
   },
 ];
 
-/**
- * Additional Assets (Lazy Load / Pagination)
- */
+/** Extra rows loaded by “Show more assets” (same shape as ASSETS). */
 export const MORE_ASSETS = [
   {
     id: 'kpi-extra-1',
     title: 'Gross Margin',
+    description: 'Margin after COGS for the selected product lines.',
     type: 'kpi',
-
-    description: 'Margin after COGS for selected product lines.',
-    subtitle: 'Trailing twelve months margin',
-
-    metadata: {
-      createdOn: '05/01/2024',
-      lastUpdated: '05/22/2024',
-      usageCount: 756,
-      scope: 'KPI',
-      pages: 1,
-    },
-
+    category: 'trending',
+    date: '05/01/2024',
     tags: ['finance', 'margin'],
-    businessQuestions: generateQuestions('KPI-X'),
-
-    metrics: {
-      ids: ['M-8800'],
-      calculation: '(Revenue - COGS) / Revenue.',
-    },
-
-    visualization: {
-      primaryChart: 'line',
-      available: 'Trend line, breakdown by SKU family.',
-    },
-
-    applicability: 'Finance affiliates only.',
+    subtitle: 'Trailing twelve months margin',
+    usedCount: 756,
+    scopeType: 'KPI',
+    pages: 1,
+    lastUpdated: '05/22/2024',
+    businessQuestions: sharedQuestions('KPI-X'),
+    metricIds: ['M-8800'],
+    calculation: '(Revenue - COGS) / Revenue.',
+    visualsAvailable: 'Trend line, breakdown by SKU family.',
+    affiliateApplicability: 'Finance affiliates.',
+    chartType: 'line',
+  },
+  {
+    id: 'layout-extra-1',
+    title: 'Incident Response',
+    description: 'Real-time view for major incident coordination.',
+    type: 'layout',
+    category: 'featured',
+    date: '04/28/2024',
+    tags: ['ops', 'incident'],
+    subtitle: 'War-room layout',
+    usedCount: 432,
+    scopeType: 'Universal',
+    pages: 3,
+    lastUpdated: '05/10/2024',
+    businessQuestions: sharedQuestions('Layout-X'),
+    kpisUsed: ['MTTR', 'Open incidents', 'Customer impact'],
+    affiliates: ['US', 'EU'],
+  },
+  {
+    id: 'viz-extra-1',
+    title: 'Geo Performance Map',
+    description: 'Regional performance with drill-down.',
+    type: 'dataviz',
+    category: 'trending',
+    date: '04/20/2024',
+    tags: ['geo', 'sales'],
+    subtitle: 'Map + table combo',
+    usedCount: 1501,
+    scopeType: 'Universal',
+    pages: 1,
+    lastUpdated: '05/02/2024',
+    businessQuestions: sharedQuestions('Viz-X'),
+    kpiFavorites: ['Regional quota', 'Pipeline'],
+    assetContext: 'Best for sales QBRs; map requires geo permission.',
+    vizChartType: 'pie',
+    isRestricted: true,
+  },
+  {
+    id: 'story-extra-1',
+    title: 'Risk & Compliance',
+    description: 'Controls coverage across key risk domains.',
+    type: 'storyboard',
+    category: 'featured',
+    date: '04/10/2024',
+    tags: ['risk', 'compliance'],
+    subtitle: 'Audit-ready narrative',
+    usedCount: 210,
+    scopeType: 'Storyboard',
+    pages: 15,
+    lastUpdated: '04/25/2024',
+    businessQuestions: sharedQuestions('Story-X'),
+    coupledKpis: ['Open findings', 'Remediation SLA'],
+    coupledFilters: ['Business unit', 'Severity'],
+    applicableAffiliates: ['GRC', 'Internal audit'],
   },
 ];
 
-/**
- * UI Constants
- */
 export const TAB_KEYS = {
   FEATURED: 'featured',
   KPI: 'kpi',
@@ -191,25 +286,26 @@ export const TAB_KEYS = {
   STORYBOARDS: 'storyboards',
 };
 
-export const TYPE_CONFIG = {
-  kpi: {
-    label: 'KPI',
-    badgeClass: 'bg-blue-100 text-blue-800',
-    tooltip: 'Metric data',
-  },
-  layout: {
-    label: 'Layout',
-    badgeClass: 'bg-green-100 text-green-800',
-    tooltip: 'Dashboard view',
-  },
-  storyboard: {
-    label: 'Storyboard',
-    badgeClass: 'bg-purple-100 text-purple-800',
-    tooltip: 'Presentation view',
-  },
-  dataviz: {
-    label: 'Data Visualization',
-    badgeClass: 'bg-orange-100 text-orange-800',
-    tooltip: 'Chart visualization',
-  },
+/** Display labels aligned with strict naming (DataViz, not generic “chart”). */
+export const TYPE_LABELS = {
+  kpi: 'KPI',
+  layout: 'Layout',
+  storyboard: 'Storyboard',
+  dataviz: 'DataViz',
+};
+
+/** Card / modal type badge colors (Tailwind utility fragments). */
+export const TYPE_BADGE_CLASSES = {
+  kpi: 'bg-blue-100 text-blue-800',
+  layout: 'bg-green-100 text-green-800',
+  storyboard: 'bg-purple-100 text-purple-800',
+  dataviz: 'bg-orange-100 text-orange-800',
+};
+
+/** Hover tooltips explaining each asset family (title attribute). */
+export const TYPE_TOOLTIPS = {
+  kpi: 'Metric data',
+  layout: 'Dashboard view',
+  storyboard: 'Presentation view',
+  dataviz: 'Chart visualization',
 };

@@ -1,0 +1,232 @@
+.library-shell {
+  max-width: 960px;
+}
+.bg-new{
+  background-color: #f7fafc;
+}
+.library-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+}
+
+.library-subtitle {
+  max-width: 36rem;
+}
+
+.library-request-btn {
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 576px) {
+  .library-header .library-request-btn {
+    position: static !important;
+    margin-left: auto;
+    margin-bottom: 0.5rem;
+    display: flex;
+  }
+}
+
+.library-tabs-track {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.library-search {
+  max-width: 640px;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 0.125rem 0.5rem rgba(15, 23, 42, 0.06) !important;
+}
+
+.library-search .library-search-icon {
+  padding-left: 1.125rem;
+  padding-right: 0.75rem;
+  min-width: 3rem;
+}
+
+.library-search .library-search-input {
+  padding-left: 0.5rem;
+  padding-top: 0.750rem;
+  padding-bottom: 0.750rem;
+}
+
+.library-search .library-search-input:focus {
+  box-shadow: none;
+  border-color: inherit;
+}
+
+.library-search:focus-within {
+  border-color: rgba(13, 110, 253, 0.45) !important;
+  box-shadow:
+    0 0.125rem 0.5rem rgba(15, 23, 42, 0.06),
+    0 0 0 0.2rem rgba(13, 110, 253, 0.15) !important;
+}
+
+.search-bar-wrap {
+  max-width: 640px;
+}
+
+.recent-searches-dropdown {
+  z-index: 20;
+  border-radius: 0.75rem;
+}
+
+.recent-search-row:hover {
+  background: rgba(13, 110, 253, 0.06);
+}
+
+.recent-search-pick:hover,
+.recent-search-pick:focus {
+  color: #0d6efd !important;
+}
+
+.recent-search-remove:hover,
+.recent-search-remove:focus {
+  color: #dc3545 !important;
+  background: rgba(220, 53, 69, 0.08);
+}
+
+/* —— Asset cards (SaaS list row: icon tile + text) —— */
+.asset-card-ref {
+  border: 1px solid #e2e6ea !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+}
+
+.asset-card-icon-box {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  background: #f0f4f8;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.asset-card-pie-icon {
+  color: #6b7c90;
+}
+
+.asset-card-icon-box.placeholder-glow {
+  padding: 0;
+  overflow: hidden;
+  background: #f0f4f8;
+}
+
+.asset-card-interactive {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.asset-card-interactive:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0.5rem 1.25rem rgba(15, 23, 42, 0.1) !important;
+  border-color: #d0d7de !important;
+}
+
+.asset-card-interactive:focus-visible {
+  outline: 2px solid rgba(13, 110, 253, 0.5);
+  outline-offset: 2px;
+}
+
+.text-truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* —— Modal —— */
+.modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem 1rem 3rem;
+  overflow-y: auto;
+  pointer-events: none;
+  animation: modalRootIn 0.28s ease-out;
+}
+
+@keyframes modalRootIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  z-index: 0;
+  pointer-events: auto;
+  animation: backdropIn 0.28s ease-out;
+}
+
+@keyframes backdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  margin-top: 0.5rem;
+  pointer-events: auto;
+  border-radius: 1rem !important;
+  animation: modalPanelIn 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes modalPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-hero-icon {
+  width: 56px;
+  height: 56px;
+}
+
+.chart-interactive-placeholder {
+  min-height: 200px;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+  cursor: grab;
+}
+
+.chart-interactive-placeholder:active {
+  cursor: grabbing;
+}
+
+.modal-primary-action-section {
+  padding-top: 0.25rem;
+}
+
+.modal-visual-icons {
+  opacity: 0.85;
+}
+
+.filtered-view-strip {
+  border-radius: 0.5rem;
+}
+
+.expanded-assets-footer {
+  margin-top: 0.5rem;
+}
